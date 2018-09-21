@@ -1,0 +1,477 @@
+<html>
+
+	<head>
+		<title>Tip Calculator</title>
+		<!-- bootstrap 4 -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<!-- extra styles outside of bootstrap -->
+		<style type="text/css">
+			body {
+				background-color: #e8e8e8;
+			}
+			.tip-main {
+				margin-top: 3em;
+			}
+			.tip-title {
+				text-align: center;
+				margin-top: 1em;
+			}
+			.solo {
+				display: none;
+			}
+			.multi {
+				display: none;
+			}
+			#solo-result-help {
+				display: none;
+			}
+			#multi-result-help {
+				display: none;
+			}
+			.result-separate {
+				border-top: 1px solid #000;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<section class="main">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12 col-xs-12 tip-main">
+						<div class="card">
+							<h1 class="tip-title">Tip Calculator</h1>
+							<hr/>
+							<!-- choose solo or multiple person tip -->
+							<div class="row">
+								<div class="col-sm-12 col-xs-12 text-center">
+									<p id="display-solo" class="btn btn-primary">Solo Tipper</p>
+									<p id="display-multi" class="btn btn-danger">Multiple Tippers</p>
+								</div>
+							</div>
+							<!-- solo tipper body -->
+							<div id="solo-section" class="card-body solo">
+								<p>Solo</p>
+								<form>
+									<div class="form-group row">
+										<div class="col-sm-2 col-xs-12">
+											<label for="solo-bill-amount">Bill Amount:</label>
+										</div>
+										<div class="col-sm-8 col-xs-12">
+											<input type="number" class="form-control" id="solo-bill-amount" placeholder="e.g. 20.45">
+										</div>
+									</div>
+									<!-- standard tip button 
+									<div class="form-group row">
+										<div class="offset-sm-2 col-sm-2">
+											<p id="solo-tip-10" class="btn btn-secondary">Tip 10%</p>
+										</div>
+										<div class="col-sm-2">
+											<p id="solo-tip-15" class="btn btn-secondary">Tip 15%</p>
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="offset-sm-2 col-sm-2">
+											<p id="solo-tip-18" class="btn btn-secondary">Tip 18%</p>
+										</div>
+										<div class="col-sm-2">
+											<p id="solo-tip-20" class="btn btn-secondary">Tip 20%</p>
+										</div>
+									</div>-->
+									<div class="form-group row">
+										<div class="col-sm-2 col-xs-12">
+											<label for="solo-tip-amount">Tip Percent:</label>
+										</div>
+										<div class="col-sm-8 col-xs-12">
+											<input type="number" class="form-control" id="solo-tip-amount" placeholder="e.g. 15">
+										</div>
+									</div>
+									<div class="form-check row">
+										<div class="offset-sm-2 col-xs-12">
+											<input type="checkbox" class="form-check-input" id="solo-roundTotal">
+											<label class="form-check-label" for="solo-roundTotal">Check to Round Total</label>
+										</div>
+									</div>
+									<div class="offset-sm-2 col-xs-12">
+										<p id="solo-calculate" class="btn btn-success">Calculate</p>
+									</div>
+								</form>
+								<hr/>
+								<div class="result">
+									<p id="solo-displayTip"></p>
+									<div id="solo-result-help">
+										<table>
+											<tbody>
+												<tr>
+													<th>Bill:</th>
+													<td id="solo-help-bill"></td>
+												</tr>
+												<tr>
+													<th>Tip:</th>
+													<td id="solo-help-tip"></td>
+												</tr>
+												<tr class="result-separate">
+													<th>Total:</th>
+													<td id="solo-help-total"></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<p id="solo-total-result-help"></p>
+								</div>
+							</div><!-- ./card-body solo -->
+							
+							<!-- multi tipper body -->
+							<div id="multi-section" class="card-body multi">
+								<p>Multi</p>
+								<form>
+									<div class="form-group row">
+										<div class="col-sm-2 col-xs-12">
+											<label for="multi-bill-amount">Bill Amount:</label>
+										</div>
+										<div class="col-sm-8 col-xs-12">
+											<input type="number" class="form-control" id="multi-bill-amount" placeholder="e.g. 20.45">
+										</div>
+									</div>
+									<!--
+									<div class="form-group row">
+										<div class="offset-sm-2 col-sm-2">
+											<p id="tip-multi-10" class="btn btn-secondary">Tip 10%</p>
+										</div>
+										<div class="col-sm-2">
+											<p id="tip-multi-15" class="btn btn-secondary">Tip 15%</p>
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="offset-sm-2 col-sm-2">
+											<p id="tip-multi-18" class="btn btn-secondary">Tip 18%</p>
+										</div>
+										<div class="col-sm-2">
+											<p id="tip-multi-20" class="btn btn-secondary">Tip 20%</p>
+										</div>
+									</div>-->
+									<div class="form-group row">
+										<div class="col-sm-2 col-xs-12">
+											<label for="multi-tip-amount">Tip Percent:</label>
+										</div>
+										<div class="col-sm-8 col-xs-12">
+											<input type="number" class="form-control" id="multi-tip-amount" placeholder="e.g. 15">
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="col-sm-2 col-xs-12">
+											<label for="people-amount"># of People:</label>
+										</div>
+										<div class="col-sm-8 col-xs-12">
+											<input type="number" class="form-control" id="people-amount" placeholder="e.g. 2">
+										</div>
+									</div>
+									<div class="form-check row">
+										<div class="offset-sm-2 col-xs-12">
+											<input type="checkbox" class="form-check-input" id="multi-roundTotal">
+											<label class="form-check-label" for="multi-roundTotal">Check to Round Total</label>
+										</div>
+									</div>
+									<div class="offset-sm-2 col-xs-12">
+										<p id="multi-calculate" class="btn btn-success">Calculate</p>
+									</div>
+								</form>
+								<hr/>
+								<div class="result">
+									<p id="multi-displayTip"></p>
+									<div id="multi-result-help">
+										<table>
+											<tbody>
+												<tr>
+													<th>Bill:</th>
+													<td id="multi-help-bill"></td>
+												</tr>
+												<tr>
+													<th>Tip:</th>
+													<td id="multi-help-tip"></td>
+												</tr>
+												<tr class="result-separate">
+													<th>Total:</th>
+													<td id="multi-help-total"></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<p id="multi-total-result-help"></p>
+								</div>
+							</div><!-- ./card-body multi -->
+						</div><!-- ./card -->
+					</div>
+				</div><!-- ./row -->
+			</div>
+		</section>
+
+		<!-- bootstrap 4 js -->
+		<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<!-- js for tip calculator -->
+		<script type="text/javascript">
+		//to-do: adjust output so when rounded, all values round, not just total and tip
+			//attach onclick for solo vs multi
+			//display section when clicked on
+			//add toggle ability
+			const soloBtn = document.getElementById('display-solo');
+			const multiBtn = document.getElementById('display-multi');
+			const soloSection = document.getElementById('solo-section');
+			const multiSection = document.getElementById('multi-section');
+			
+			/*soloBtn.onclick = function() {
+				if (multiSection.style.display == "block") {
+					$('#multi-section').fadeOut('slow', function() {
+						$('#solo-section').fadeIn('slow');
+					});
+				} else {
+					soloSection.style.display = "block";
+					multiSection.style.display = "none";
+				}
+			};
+			
+			multiBtn.onclick = function() {
+				multiSection.style.display = "block";
+				soloSection.style.display = "none";
+			};*/
+			
+			$('#display-solo').click(function(e){
+				if ($('#multi-section').is(":visible")) 
+				$('#multi-section').fadeOut('slow', function() {
+					$('#solo-section').fadeIn('slow');
+				});
+				else 
+					$('#solo-section').fadeIn('slow');
+			});
+			
+			$('#display-multi').click(function(e){
+				if ($('#solo-section').is(":visible"))
+				$('#solo-section').fadeOut('slow', function() {
+					$('#multi-section').fadeIn('slow');
+				});
+				else
+					$('#multi-section').fadeIn('slow');
+			});
+		
+			multiBtn.onclick = function() {
+				multiSection.style.display = "block";
+				soloSection.style.display = "none";
+			};
+			
+			//function that will calculate the tip
+			function soloCalcTip() {
+				//get input values and convert to decimal
+				let bill = document.getElementById('solo-bill-amount').value;
+				parseFloat(bill).toFixed(2);
+				let tip = document.getElementById('solo-tip-amount').value;
+				parseFloat(tip);
+				//calculate tip percentage
+				let tipAdjust = tip/100;
+				//grab result to update with calculated value
+				let showResult = document.getElementById('solo-displayTip');
+				//convert calculation to decimal and round to nearest two places
+				let result = parseFloat(bill * tipAdjust).toFixed(2);
+				
+				//get total elements to display
+				let billHelp = document.getElementById('solo-help-bill');
+				let tipHelp = document.getElementById('solo-help-tip');
+				let totalHelp = document.getElementById('solo-help-total');
+				let totalResultHelp = document.getElementById('solo-total-result-help');
+				// add bill amount and tip 
+				let total = Number(bill) + Number(result);
+				
+				//if statement to check if inputs are empty and display error message
+				if (bill === '' || tip === '' || bill < 0 || tip < 0) {
+					// display error message and focus on problem field
+					if (bill === '' && tip === '') {
+						document.getElementById('solo-bill-amount').focus();
+						document.getElementById('solo-result-help').style.display = "none";
+						document.getElementById('solo-total-result-help').style.display = "none";
+						showResult.innerHTML = "Please enter a bill amount and tip percentage.";
+					} else if(bill === '') {
+						document.getElementById('solo-bill-amount').focus();
+						document.getElementById('solo-result-help').style.display = "none";
+						document.getElementById('solo-total-result-help').style.display = "none";
+						showResult.innerHTML = "Please enter a bill amount.";
+					} else if (tip === '') {
+						document.getElementById('solo-tip-amount').focus();
+						document.getElementById('solo-result-help').style.display = "none";
+						document.getElementById('solo-total-result-help').style.display = "none";
+						showResult.innerHTML = "Please enter a tip percentage.";
+					} else if (bill < 0) {
+						document.getElementById('solo-bill-amount').focus();
+						document.getElementById('solo-result-help').style.display = "none";
+						document.getElementById('solo-total-result-help').style.display = "none";
+						showResult.innerHTML = "Bill amount must be greater than 0.";
+					} else {
+						document.getElementById('solo-tip-amount').focus();
+						document.getElementById('solo-result-help').style.display = "none";
+						document.getElementById('solo-total-result-help').style.display = "none";
+						showResult.innerHTML = "Tip percentage must be greater than 0.";
+					};
+					 
+				} else {
+					//add check to see if rounding checkbox is checked
+					if (document.getElementById('solo-roundTotal').checked == true) {
+						//show result
+						//showResult.innerHTML = "The tip for this bill $" + bill + " at " + tip + "% is: $" + result;
+						let roundResult = Math.round(result);
+						showResult.innerHTML = "A " + tip + "% tip for this bill is: $" + roundResult;
+						let roundTotal = (Number(bill) + Number(roundResult)).toFixed(2);
+						//show bill addition section
+						document.getElementById('solo-result-help').style.display = "block";
+						billHelp.innerHTML = "$" + bill;
+						tipHelp.innerHTML = "$" + roundResult + " +";
+						//totalHelp.innerHTML = "$" + total.toFixed(2);
+						totalHelp.innerHTML = "$" + roundTotal;
+						totalResultHelp.innerHTML = "The total for the bill with a " + tip + "% tip is: $" + roundTotal;
+					} else {
+						//show result
+						//showResult.innerHTML = "The tip for this bill $" + bill + " at " + tip + "% is: $" + result;
+						showResult.innerHTML = "A " + tip + "% tip for this bill is: $" + result;
+						
+						//show bill addition section
+						document.getElementById('solo-result-help').style.display = "block";
+						billHelp.innerHTML = "$" + bill;
+						tipHelp.innerHTML = "$" + result + " +";
+						totalHelp.innerHTML = "$" + total.toFixed(2);
+						totalResultHelp.innerHTML = "The total for the bill with a " + tip + "% tip is: $" + total.toFixed(2);
+					};
+				};
+			};//end soloCalcTip
+			
+			//function that will calculate the tip
+			function multiCalcTip() {
+				//get input values and convert to decimal
+				let bill = document.getElementById('multi-bill-amount').value;
+				parseFloat(bill).toFixed(2);
+				let tip = document.getElementById('multi-tip-amount').value;
+				parseFloat(tip);
+				let people = document.getElementById('people-amount').value;
+				parseFloat(people);
+				let peopleRounded = Math.round(people);
+				//calculate tip percentage
+				let tipAdjust = tip/100;
+				//grab result to update with calculated value
+				let showResult = document.getElementById('multi-displayTip');
+				//convert calculation to decimal and round to nearest two places
+				//fixed for correct total bill price
+				let fullResult = parseFloat(bill * tipAdjust).toFixed(2);
+				let result = parseFloat((bill * tipAdjust) / peopleRounded).toFixed(2);
+				
+				//get total elements to display
+				let billHelp = document.getElementById('multi-help-bill');
+				let tipHelp = document.getElementById('multi-help-tip');
+				let totalHelp = document.getElementById('multi-help-total');
+				let totalResultHelp = document.getElementById('multi-total-result-help');
+				// add bill amount and tip 
+				//fixed for correct total bill price
+				let fullTotal = Number(bill) + Number(fullResult);
+				let total = Number(bill) + Number(result);
+				
+				//if statement to check if inputs are empty and display error message
+				if (bill === '' || tip === '' || people === '' || people < 1 || bill < 0 || tip < 0) {
+					// display error message and focus on problem field
+					if (bill === '' && tip === '') {
+						document.getElementById('multi-bill-amount').focus();
+						document.getElementById('multi-result-help').style.display = "none";
+						document.getElementById('multi-total-result-help').style.display = "none";
+						showResult.innerHTML = "Please enter a bill amount and tip percentage.";
+					} else if (bill === '' && tip === '' && people === '') {
+						document.getElementById('multi-bill-amount').focus();
+						document.getElementById('multi-result-help').style.display = "none";
+						document.getElementById('multi-total-result-help').style.display = "none";
+						showResult.innerHTML = "Please enter a bill amount, tip percentage, and number of people.";
+					} else if(bill === '') {
+						document.getElementById('multi-bill-amount').focus();
+						document.getElementById('multi-result-help').style.display = "none";
+						document.getElementById('multi-total-result-help').style.display = "none";
+						showResult.innerHTML = "Please enter a bill amount.";
+					} else if (tip === '') {
+						document.getElementById('multi-tip-amount').focus();
+						document.getElementById('multi-result-help').style.display = "none";
+						document.getElementById('multi-total-result-help').style.display = "none";
+						showResult.innerHTML = "Please enter a tip percentage.";
+					} else if (people === '' || people < 1) { 
+						if (people < 1) {
+							document.getElementById('people-amount').focus();
+							document.getElementById('multi-result-help').style.display = "none";
+							document.getElementById('multi-total-result-help').style.display = "none";
+							showResult.innerHTML = "Please enter a valid amount of people.";
+						} else {
+							document.getElementById('people-amount').focus();
+							document.getElementById('multi-result-help').style.display = "none";
+							document.getElementById('multi-total-result-help').style.display = "none";
+							showResult.innerHTML = "Please enter a number of people.";
+						};
+					} else if (bill < 0) {
+						document.getElementById('multi-bill-amount').focus();
+						document.getElementById('multi-result-help').style.display = "none";
+						document.getElementById('multi-total-result-help').style.display = "none";
+						showResult.innerHTML = "Bill amount must be greater than 0.";
+					} else {
+						document.getElementById('multi-tip-amount').focus();
+						document.getElementById('multi-result-help').style.display = "none";
+						document.getElementById('multi-total-result-help').style.display = "none";
+						showResult.innerHTML = "Tip percentage must be greater than 0.";
+					};
+				} else {
+					//if to check to make sure they inputed more than one person
+					if (peopleRounded == 1) {
+						showResult.innerHTML = "The number of people must be greater than 1.";
+						document.getElementById('people-amount').focus();
+					}else {
+						//add check to see if rounding checkbox is checked
+						if (document.getElementById('multi-roundTotal').checked == true) {
+							//show result
+							//showResult.innerHTML = "The tip for this bill $" + bill + " at " + tip + "% is: $" + result;
+							let roundResult = Math.round(result);
+							showResult.innerHTML = "A " + tip + "% tip for this bill is: $" + roundResult + " per person.";
+							let roundTotal = (Number(bill) + Number(roundResult * people)).toFixed(2);
+							
+							//show bill addition section
+							document.getElementById('multi-result-help').style.display = "block";
+							billHelp.innerHTML = "$" + bill;
+							tipHelp.innerHTML = "$" + roundResult * people + " +";
+							totalHelp.innerHTML = "$" + roundTotal;
+							totalResultHelp.innerHTML = "The total for the bill with a " + tip + "% tip is: $" + roundTotal;
+						} else {
+							//show result
+							//showResult.innerHTML = "The tip for this bill $" + bill + " at " + tip + "% is: $" + result;
+							showResult.innerHTML = "A " + tip + "% tip for this bill is: $" + result + " per person.";
+							
+							//show bill addition section
+							document.getElementById('multi-result-help').style.display = "block";
+							billHelp.innerHTML = "$" + bill;
+							tipHelp.innerHTML = "$" + result * people + " +";
+							totalHelp.innerHTML = "$" + total.toFixed(2);
+							totalResultHelp.innerHTML = "The total for the bill with a " + tip + "% tip is: $" + fullTotal;
+						};
+					};
+				};
+			};//end multiCalcTip
+			
+			//solo
+			//get calculate button
+			let soloCalc = document.getElementById('solo-calculate');
+			//attach on click listener and call calcTip function
+			soloCalc.onclick = function() {
+				soloCalcTip();
+			};
+			
+			//multi
+			//get calculate button
+			let multiCalc = document.getElementById('multi-calculate');
+			//attach on click listener and call calcTip function
+			multiCalc.onclick = function() {
+				multiCalcTip();
+			};
+			
+		</script>
+	</body>
+
+</html>
